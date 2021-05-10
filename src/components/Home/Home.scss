@@ -267,6 +267,51 @@
       
     }
   }
+
+  @media only screen and (max-width: 768px) {
+    .joke-wrap {
+      margin-bottom: 25px;
+      background: none;
+      min-height: auto;
+      
+      .joke-container {
+        margin: 0 auto;
+        width: 90%;
+        min-height: auto;
+      }
+
+      .joke-text {
+        font-size: 25px;
+      }
+    }
+
+    .email-wrap {
+      align-items: center;
+      flex-wrap: wrap;
+      flex-direction: column-reverse;
+    }
+
+    .mailing-list-form {
+      width: 90%;
+      
+      .email-form {
+        flex-wrap: nowrap;
+      }
+    }
+    
+    .info-container {
+      display: none;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+
+    .send-joke-btn {
+      margin: 0 auto;
+    }
+  }
 } // .Home
 
 @keyframes spin {

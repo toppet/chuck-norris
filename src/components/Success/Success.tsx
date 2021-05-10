@@ -32,7 +32,7 @@ function Success() {
     }
 
     return (
-      <div>
+      <div className="success-page-content">
         <h1>Congratulations, Chuck Norris approves your humor!</h1>
         <img src="https://i.pinimg.com/originals/b4/d0/bc/b4d0bc7a0a9a9d6f34274e7be5eabfe1.gif" alt="chuck norris" />
         <h2>The joke have been successfully sent to the following addresses:</h2>
