@@ -296,11 +296,25 @@
       
       .email-form {
         flex-wrap: nowrap;
+
+        input,
+        .add-email-btn {
+          font-size: 15px;
+        }
+        button.add-email-btn {
+          width: 150px;
+          font-size: 15px;
+          white-space: nowrap;
+        }
       }
     }
     
     .info-container {
       display: none;
+    }
+
+    .sorting-wrap span {
+      font-size: 15px;
     }
 
     .radio-group {
