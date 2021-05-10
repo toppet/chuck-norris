@@ -1,0 +1,279 @@
+@import "../../shared/variables.scss";
+
+.Home {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 25px;
+
+  section.joke-wrap,
+  section.email-wrap {
+    // border: 2px solid red;
+    position: relative;
+    margin: 25px 0;
+    display: flex;
+  }
+
+  .joke-wrap,
+  .joke-container {
+    min-height: 400px;
+  }
+
+  .joke-wrap {
+    position: relative;
+    background: url("../../shared/images/chuck-norris.png") no-repeat 100% 0;
+    background-size: 550px auto;
+  }
+
+  .joke-container {
+    width: 500px;
+    padding: 25px;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    background: $dark-purple;
+    border: 10px solid $light-purple;
+    border-radius: 50px;
+
+    .loading-message {
+      color: hotpink;
+      font-weight: bold;
+      font-size: 25px;
+      text-align: center;
+    }
+
+    .joke-text {
+      color: white;
+      font-size: 35px;
+      font-weight: bold;
+      line-height: 1.5;
+    }
+
+    .fetch-button {
+      border: none;
+      background: $light-purple;
+      padding: 5px 25px;
+      border: 5px solid $mid-purple;
+      border-radius: 50px;
+      color: $dark-purple;
+      font-weight: bold;
+      user-select: none;
+      display: block;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+
+      svg {
+        margin-left: 5px;
+      }
+
+      svg.spinner {
+        animation-name: spin;
+        animation-duration: 2000ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+
+      &:active {
+        background: $dark-purple;
+        color: $light-purple;
+      }
+    }
+  }
+
+  .mailing-list-form {
+    width: 50%;
+
+    .email-form {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border: 2px solid $dark-purple;
+      border-radius: 5px;
+      overflow: hidden;
+
+      input {
+        flex: 1;
+        border: none;
+        outline: none;
+        background: transparent;
+        padding-left: 15px;
+        font-size: 18px;
+      }
+
+      button.add-email-btn {
+        flex-basis: auto;
+        border: none;
+        background: $dark-purple;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 5px 25px;
+
+        &:disabled {
+          background: lighten($dark-purple, 50%);
+          cursor: auto;
+        }
+      }
+    }
+
+    .input-error {
+      width: 100%;
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
+      margin-left: 15px;
+    }
+  }
+  
+  // === SORTING WRAP === //
+  .sorting-wrap {
+    display: flex;
+    align-items: center;
+    margin: 25px 5px;
+    font-size: 20px;
+
+    span {
+      display: inline-block;
+      margin-right: auto;
+      font-weight: bold;
+    }
+
+    .radio-group {
+      border: 2px solid $dark-purple;
+      border-radius: 5px;
+      overflow: hidden;
+      font-size: 15px;
+
+
+      input {
+        display: none;
+      }
+      
+      label {
+        cursor: pointer;
+        padding: 5px 10px;
+        width: 125px;
+        display: inline-block;
+        text-align: center;
+      }
+      
+      input:checked + label {
+        background: $dark-purple; 
+        color: white;
+        font-weight: bold;
+      }
+
+      input:disabled + label,
+      input:checked:disabled + label {
+        opacity: 0.2;
+        cursor: auto; 
+      }
+    }
+
+  }
+
+  // === EMAIL LIST === //
+  .email-list {
+    border: 2px solid $dark-purple;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 20px;
+
+    .email-list-item {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 10px 15px;
+      margin: 0;
+
+      
+      &:nth-child(even) {
+        background: #eee;
+      }
+      
+      &:hover {
+        background: lighten($light-purple, 5%);
+      }
+
+      .delete-item {
+        margin-left: auto;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .send-joke-btn {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: $light-green;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 25px;
+    margin-left: auto;
+
+    &:active {
+      background-color: lighten($light-green, 10%);
+    }
+    
+    svg {
+      margin-left: 10px;
+    }
+  }
+
+  .info-container {
+    width: 50%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    .info-box {
+      display: flex;
+      background: $light-grey;
+      margin: 0 auto;
+      width: 400px;
+      border: 3px solid $mid-grey;
+      border-radius: 15px;
+      padding: 30px;
+
+      .info-text {
+        padding-top: 0;
+        padding-left: 0;
+        padding-left: 15px;
+      }
+
+      .info-text p {
+        color: $grey;
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 15px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      
+    }
+  }
+} // .Home
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}

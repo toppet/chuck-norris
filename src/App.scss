@@ -1,0 +1,16 @@
+.App {
+  // border: 2px solid blue;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 100vh;
+
+  @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    width: 100%;
+    padding: 0;
+  }
+}
