@@ -42,7 +42,7 @@ function Home() {
   const [loading, setLoading] = useState<Boolean>(true);
   const [emails, setEmails] = useState<Array<String>>([]);
   const [selectedSortBy, setSelectedSortBy] = useState<String>(SORTVALUES.domain);
-  const { register, handleSubmit, formState, reset } = useForm<FormInputs>({ mode: "onChange" });
+  const { register, handleSubmit, formState, reset, trigger } = useForm<FormInputs>({ mode: "onChange" });
 
   //// API RELATED CODEPART ////
   // Call the api
@@ -84,12 +84,13 @@ function Home() {
     reset();
   };
 
-  const removeEmail = (emailToRemove: String) => {
+  const removeEmail = async (emailToRemove: String) => {
     // RESET to default value
     if(emails.length === 1) {
       setSelectedSortBy(SORTVALUES.name);
     }
-    setEmails(emails => emails.filter(email => email !== emailToRemove));
+    await setEmails(emails => emails.filter(email => email !== emailToRemove));
+    await trigger('email'); // manually trigger form validation
   }
 
   const sortByDomain = (arrayToSortByDomain: Array<String>) => {
@@ -146,6 +147,8 @@ function Home() {
 
     history.push('/success', { emails });
   }
+
+  const isUniqueEmail = (email: string) => !emails.includes(email);
   
   //// ======================================== ////
   //// ============  RENDER HTML  ============= ////
@@ -175,12 +178,13 @@ function Home() {
             <form onSubmit={handleSubmit(addEmail)}>
               <div className="email-form">
                 {/* register email input into the hook by invoking the "register" function */}
-                <input className="email" placeholder="example@gmail.com" {...register("email", { required: true, pattern: /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$/ })} />
+                <input className="email" placeholder="example@gmail.com" {...register("email", { required: true, pattern: /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$/, validate: isUniqueEmail })} />
                 <button type="submit" className="add-email-btn" disabled={!formState.isValid}>Add email</button>
               </div>              
               {/* errors will return when email field validation fails  */}
-              {formState.errors.email?.type === 'required' && <span className="input-error">This field is required</span>}
-              {formState.errors.email?.type === 'pattern' && <span className="input-error">Invalid email address</span>}
+              {formState.errors?.email?.type === 'required' && <span className="input-error">This field is required</span>}
+              {formState.errors?.email?.type === 'pattern' && <span className="input-error">Invalid email address</span>}
+              {formState.errors?.email?.type === 'validate' && <span className="input-error">You've already added that email address</span>}
             </form>
 
             <div className="hidden-when-empty" hidden={emails.length === 0}>
